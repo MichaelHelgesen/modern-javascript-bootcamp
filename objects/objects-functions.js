@@ -22,3 +22,16 @@ let bookSummary = getSummary(myBook);
 let otherBooksummary = getSummary(otherBook);
 
 console.log(bookSummary.pageCountSummary);
+
+
+var tempConverter = function (farenheit) {
+    return {
+        celsius: (farenheit - 32) * (5 / 9),
+        farenheit: farenheit,
+        kelvin: (farenheit + 459.67) * (5 / 9)
+    }
+}
+
+let temp = tempConverter(68);
+
+console.log(temp);
