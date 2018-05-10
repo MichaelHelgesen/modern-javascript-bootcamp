@@ -1,8 +1,8 @@
 // students score, total possible score
 // 15/20 -> you got a C (75%)!
 
-let totalScore = function (studentScore, maxScore = 100) {
-    let percent = (studentScore / maxScore) * 100;
+const totalScore = function (studentScore, maxScore = 100) {
+    const percent = (studentScore / maxScore) * 100;
     
     let letterGrade = ''
 
@@ -22,6 +22,6 @@ let totalScore = function (studentScore, maxScore = 100) {
 }
 
 
-let score = totalScore(15, 100);
+const score = totalScore(15, 100);
 
 console.log(score);
