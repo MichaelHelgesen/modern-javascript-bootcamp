@@ -1,4 +1,4 @@
-const toDos = [
+const todos = [
     'Clean the house',
     'Walk the dog',
     'Work out',
@@ -6,14 +6,23 @@ const toDos = [
     'Write a blog post'
 ]
 
-console.log(
-    `You have ${toDos.length} todos`
-)
+todos.splice(2, 1)
+todos.push('Wash the car')
+todos.shift()
+
 
 console.log(
-    `To do: ${toDos[0]}`
+    `You have ${todos.length} todos`
 )
 
-console.log(
-    `To do: ${toDos[toDos.length - 2]}`
+todos.forEach(
+    function(item, index) {
+        console.log(`${index + 1}. ${item}`) 
+    }
 )
+
+for (let count = 0; count < todos.length; count++) {
+    const num = count + 1
+    const todo = todos[count]  
+    console.log(`${num}. ${todo}`) 
+}
