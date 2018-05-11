@@ -1,28 +1,44 @@
-const todos = [
-    'Clean the house',
-    'Walk the dog',
-    'Work out',
-    'Program',
-    'Write a blog post'
-]
+// convert strings to objects
+    // Prop: text, completed
+const todos = [{
+    text: 'Clean the house',
+    completed: 'yes'
+}, {
+    text: 'Program',
+    completed: 'yes'
+}, {
+    text: 'Walk the dog',
+    completed: 'yes'
+}, {
+    text: 'Work out',
+    completed: 'yes'
+}, {
+    text: 'Write a blog post',
+    completed: 'yes'
+}]
 
-todos.splice(2, 1)
-todos.push('Wash the car')
-todos.shift()
 
-
-console.log(
-    `You have ${todos.length} todos`
-)
-
-todos.forEach(
-    function(item, index) {
-        console.log(`${index + 1}. ${item}`) 
+// My solution:
+const deleteToDo = function (array, searchText) {
+    let indexOfSearch;
+    array.find(function (todo, index) {
+        if (todo.text.toLowerCase() === searchText.toLowerCase()) {
+            indexOfSearch = index;
+       } 
+       
+    })
+    todos.splice(indexOfSearch, 1)
+}  
+// Instructor code:
+/* const deleteToDo = function (array, searchText) {
+    const index = array.findIndex(function (todo) {
+        return todo.text.toLowerCase() === searchText.toLowerCase();
+    })
+    if (index > -1) {
+        array.splice(index, 1)
     }
-)
+} */
 
-for (let count = 0; count < todos.length; count++) {
-    const num = count + 1
-    const todo = todos[count]  
-    console.log(`${num}. ${todo}`) 
-}
+
+deleteToDo(todos, 'Work out')
+console.log(todos)
