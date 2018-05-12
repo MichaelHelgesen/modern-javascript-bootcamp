@@ -1,6 +1,7 @@
 const account = {
     name: 'Mikke',
     expenses: [],
+    income: [],
     addExpense: function (expense, amount) {
         //account.expenses.unshift({ It's better to use ".this"
         this.expenses.push({
@@ -8,23 +9,54 @@ const account = {
             amount: amount
         })
     },
-    getAccountSummary: function () {
-        let total = 0
-        this.expenses.forEach(function (item, index) {
-            total = total + item.amount
+    addIncome: function (income, amount) {
+        this.income.push({
+            description: income,
+            amount: amount
         })
-        return `${this.name} has $${total} in expenses.` 
+    },
+    getAccountSummary: function () {
+        let expenses = 0
+        let income = 0
+        
+        this.expenses.forEach(function (item, index) {
+            expenses = expenses + item.amount
+        })
+
+        this.income.forEach(function (item, index) {
+            income = income + item.amount
+        })  
+
+
+/*         const typeOf = function (type, value) {
+            type.forEach(function (item, index) {
+                if (type === account.expenses) {
+                    expenses = expenses + item.amount
+                } else {
+                    income = income + item.amount
+                }               
+            })
+        }
+
+        typeOf(account.expenses)
+        typeOf(account.income)  */
+
+        return `${this.name} has a balance of $${income - expenses}. ${income} in income. $${expenses} in expenses.` 
     }
 }
+
+// OK: 1. add an income array to the account
+// OK: 2. addIncome - description - amount
+// 3. Tweak getAccount summary - income - expenses
+// 4. Mikke has a balance of $10. $100 in income. $90 in expenses.
 
 
 // Expense 1. description 2. amount
 // add expense - description, amount (new object)
 account.addExpense('Rent', 950)
 account.addExpense('Beer', 100)
-account.addExpense('PC', 10000)
-
-console.log(account.expenses)
+account.addIncome('Job', 1000)
 
 // getAccountSummary - total up all expenses - Mikke has kr 1200 in expenses
+console.log(account)
 console.log(account.getAccountSummary())
