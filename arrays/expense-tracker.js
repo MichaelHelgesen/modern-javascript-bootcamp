@@ -16,16 +16,24 @@ const account = {
         })
     },
     getAccountSummary: function () {
-        let expenses = 0
-        let income = 0
+       /*  let expenses = 0
+        let income = 0 */
         
-        this.expenses.forEach(function (item, index) {
+       /*  this.expenses.forEach(function (item, index) {
             expenses = expenses + item.amount
-        })
+        }) */
 
-        this.income.forEach(function (item, index) {
+        const expenses = this.expenses.reduce(function (acc, expense) {
+            return acc + expense.amount
+        }, 0)
+
+        const income = this.income.reduce(function (acc, income) {
+            return acc + income.amount
+        }, 0)
+
+      /*   this.income.forEach(function (item, index) {
             income = income + item.amount
-        })  
+        })  */ 
 
 
 /*         const typeOf = function (type, value) {
