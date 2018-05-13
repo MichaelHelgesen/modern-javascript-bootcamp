@@ -19,6 +19,7 @@ const account = {
        /*  let expenses = 0
         let income = 0 */
         
+        
 
 
         const expenses = this.expenses.reduce(function (acc, expense) {
