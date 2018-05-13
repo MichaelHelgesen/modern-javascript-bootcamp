@@ -19,9 +19,7 @@ const account = {
        /*  let expenses = 0
         let income = 0 */
         
-       /*  this.expenses.forEach(function (item, index) {
-            expenses = expenses + item.amount
-        }) */
+
 
         const expenses = this.expenses.reduce(function (acc, expense) {
             return acc + expense.amount
@@ -30,6 +28,10 @@ const account = {
         const income = this.income.reduce(function (acc, income) {
             return acc + income.amount
         }, 0)
+        
+       /*  this.expenses.forEach(function (item, index) {
+            expenses = expenses + item.amount
+        }) */
 
       /*   this.income.forEach(function (item, index) {
             income = income + item.amount
