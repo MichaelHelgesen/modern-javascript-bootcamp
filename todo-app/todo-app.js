@@ -36,6 +36,11 @@ document.querySelector('#add-note').addEventListener('click', function() {
     console.log('hello')
 })
 
+// Listen for text change.
+document.querySelector("#add-note-field").addEventListener('input', function (e) {
+    console.log(e.target.value)
+})
+
 /* const paragraphs = document.querySelectorAll('p')
 
 paragraphs.forEach(function (paragraph, index) {
