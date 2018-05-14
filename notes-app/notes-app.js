@@ -11,28 +11,14 @@ const notes = [{
 ]
 
 
-
-
-// DOM
-
-// Query and remove
-/* const p = document.querySelector('p')
-p.remove() */
-
-// Query all and remove.
-const ps = document.querySelectorAll('p');
-
-
-
-
-
-ps.forEach(function (p) {
-    //console.log(p.textContent)
-    p.textContent = 'Hello'
+document.querySelector('#create-note').addEventListener('click', function(e) {
+    e.target.textContent = 'The button was clicked'
+    
 })
 
+document.querySelector('#remove-all').addEventListener('click', function () {
+    document.querySelectorAll('.note').forEach(function (note) {
+        note.remove()
+    })
+})
 
-// Add a new element
-const newParagraph = document.createElement('p')
-newParagraph.textContent = 'Paragraph from javascript.'
-document.querySelector('body').appendChild(newParagraph)
