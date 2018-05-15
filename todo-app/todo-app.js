@@ -15,21 +15,38 @@ const todos = [{
     completed: true
 }]
 
-// You have to 2 todos left (p element)
-const incompleteTodos = todos.filter(function (todo, index) {
-    return !todo.completed
-})
+// Setup a div for todos - OK
 
-const header = document.createElement('h3')
-header.textContent = `You have ${incompleteTodos.length} todos left`
-document.querySelector('body').appendChild(header)
+//Setup filters (searchText) and wire up a new filter input to change it. 
+// Create a renderTodos function to render and rerender the latest filtered data.
 
-// Add a P for each todo above (use text value)
-todos.forEach(function (item, index) {
-    const p = document.createElement('p')
-    p.textContent = item.text
-    document.querySelector('body').appendChild(p)
-})
+const filters = {
+    searchText: ''
+}
+
+const renderTodos = function (todos, filters) {
+    const filteredTodos = todos.filter(function (note) {
+        return note.text.toLowerCase().includes(filters.searchText.toLowerCase())
+    })
+
+    const incompleteTodos = filteredTodos.filter(function (todo, index) {
+        return !todo.completed
+    })
+
+    document.querySelector('#todos').innerHTML = ''
+
+    const header = document.createElement('h3')
+    header.textContent = `You have ${incompleteTodos.length} todos left`
+    document.querySelector('#todos').appendChild(header)
+
+    filteredTodos.forEach(function (item, index) {
+        const p = document.createElement('p')
+        p.textContent = item.text
+        document.querySelector('#todos').appendChild(p)
+    })
+}
+
+renderTodos(todos, filters)
 
 // Listen for new todo creation
 document.querySelector('#add-note').addEventListener('click', function() {
@@ -37,9 +54,11 @@ document.querySelector('#add-note').addEventListener('click', function() {
 })
 
 // Listen for text change.
-document.querySelector("#add-note-field").addEventListener('input', function (e) {
-    console.log(e.target.value)
+document.querySelector("#search-notes").addEventListener('input', function (e) {
+    filters.searchText = e.target.value
+    renderTodos(todos, filters)
 })
+
 
 /* const paragraphs = document.querySelectorAll('p')
 
