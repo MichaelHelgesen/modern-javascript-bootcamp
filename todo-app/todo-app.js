@@ -21,7 +21,8 @@ const todos = [{
 // Create a renderTodos function to render and rerender the latest filtered data.
 
 const filters = {
-    searchText: ''
+    searchText: '',
+    hideCompleted: false
 }
 
 const renderTodos = function (todos, filters) {
@@ -64,4 +65,9 @@ document.querySelector('#add-notes-form').addEventListener('submit', function (e
     })
     renderTodos(todos, filters)
     event.target.elements.todoToAdd.value = ''
+})
+
+document.querySelector('#hide-completed-todos').addEventListener('change', function (event) {
+    filters.hideCompleted = event.target.checked
+    renderTodos(todos, filters)
 })
