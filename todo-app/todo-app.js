@@ -48,10 +48,6 @@ const renderTodos = function (todos, filters) {
 
 renderTodos(todos, filters)
 
-// Listen for new todo creation
-document.querySelector('#add-note').addEventListener('click', function() {
-    console.log('hello')
-})
 
 // Listen for text change.
 document.querySelector("#search-notes").addEventListener('input', function (e) {
@@ -59,12 +55,15 @@ document.querySelector("#search-notes").addEventListener('input', function (e) {
     renderTodos(todos, filters)
 })
 
-
-/* const paragraphs = document.querySelectorAll('p')
-
-paragraphs.forEach(function (paragraph, index) {
-    if (paragraph.textContent.includes('the')) {
-        paragraph.remove()
-    }
+// Listen for adding note
+document.querySelector('#add-notes-form').addEventListener('submit', function (event) {
+    event.preventDefault()
+    console.log(event.target.elements.todoToAdd.value)
+    todos.push({
+        text: event.target.elements.todoToAdd.value,
+        completed: false
+    })
+    console.log(todos)
+    renderTodos(todos, filters)
+    event.target.elements.todoToAdd.value = ''
 })
- */
