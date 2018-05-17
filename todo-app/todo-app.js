@@ -58,12 +58,10 @@ document.querySelector("#search-notes").addEventListener('input', function (e) {
 // Listen for adding note
 document.querySelector('#add-notes-form').addEventListener('submit', function (event) {
     event.preventDefault()
-    console.log(event.target.elements.todoToAdd.value)
     todos.push({
         text: event.target.elements.todoToAdd.value,
         completed: false
     })
-    console.log(todos)
     renderTodos(todos, filters)
     event.target.elements.todoToAdd.value = ''
 })
