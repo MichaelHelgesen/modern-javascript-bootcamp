@@ -1,19 +1,4 @@
-const todos = [{
-    text: 'Clean the house',
-    completed: false
-}, {
-    text: 'Program',
-    completed: true
-}, {
-    text: 'Walk the dog',
-    completed: true
-}, {
-    text: 'Work out',
-    completed: false
-}, {
-    text: 'Write a blog post',
-    completed: true
-}]
+let todos = []
 
 // Setup a div for todos - OK
 
@@ -23,6 +8,12 @@ const todos = [{
 const filters = {
     searchText: '',
     hideCompleted: false
+}
+
+const todoJSON = localStorage.getItem('todos')
+
+if (todoJSON !== null) {
+    todos = JSON.parse(todoJSON)
 }
 
 const renderTodos = function (todos, filters) {
@@ -55,7 +46,11 @@ const renderTodos = function (todos, filters) {
 
     filteredTodos.forEach(function (item, index) {
         const p = document.createElement('p')
-        p.textContent = item.text 
+        if (item.text.length > 0) {
+            p.textContent = item.text 
+        } else {
+            p.textContent = 'Unnamed todo'
+        }
         document.querySelector('#todos').appendChild(p)
     })
 }
@@ -76,6 +71,7 @@ document.querySelector('#add-notes-form').addEventListener('submit', function (e
         text: event.target.elements.todoToAdd.value,
         completed: false
     })
+    localStorage.setItem('todos', JSON.stringify(todos))
     renderTodos(todos, filters)
     event.target.elements.todoToAdd.value = ''
 })
