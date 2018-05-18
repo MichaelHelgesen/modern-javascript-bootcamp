@@ -27,8 +27,21 @@ const filters = {
 
 const renderTodos = function (todos, filters) {
     const filteredTodos = todos.filter(function (note) {
-        return note.text.toLowerCase().includes(filters.searchText.toLowerCase())
+        /* if (!filters.hideCompleted) {
+            return note.text.toLowerCase().includes(filters.searchText.toLowerCase())
+        } else {
+            return note.text.toLowerCase().includes(filters.searchText.toLowerCase()) && !note.completed
+        } */
+
+    const searchTextMatch = note.text.toLowerCase().includes(filters.searchText.toLowerCase())
+    const hideCompletedMatch = !filters.hideCompleted || !note.completed
+
+    return searchTextMatch && hideCompletedMatch
     })
+
+/*     filteredTodos = filteredTodos.filter(function (note) {
+        return !filters.hideCompleted || !note.completed
+    }) */
 
     const incompleteTodos = filteredTodos.filter(function (todo, index) {
         return !todo.completed
@@ -42,7 +55,7 @@ const renderTodos = function (todos, filters) {
 
     filteredTodos.forEach(function (item, index) {
         const p = document.createElement('p')
-        p.textContent = item.text
+        p.textContent = item.text 
         document.querySelector('#todos').appendChild(p)
     })
 }
