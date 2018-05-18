@@ -7,14 +7,15 @@
     <body>
         <h1>Notes app</h1>
         <input id="search-text" type="text" placeholder="Filter todos">
+        <select id="filter-by">
+            <option value="byEdited">Sort by last edited</option>
+            <option value="byCreated">Sort by recently created</option>
+            <option value="alphabetically">Sort alphabetically</option>
+        </select>
         <h2>Take notes and never forget</h2>
         <div id="notes-div">
-            
         </div>
         <button id="create-note">Create note</button><br><br>
-        <label>
-            <input type="checkbox" name="" id="for-fun"> Check me for fun
-        </label>
         <script src="notes-app.js"></script>
     </body>
 </html>
