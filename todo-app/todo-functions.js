@@ -23,13 +23,25 @@ const generateSummaryDOM = function (incompleteTodos) {
 
 // Get the DOM elements for an individual note
 const generateToDOM = function (item) {
-    const p = document.createElement('p')
+
+    const todoDiv = document.createElement('div')
+    const button = document.createElement('button')
+    button.textContent = 'x'
+    const checkbox = document.createElement('input')
+    checkbox.setAttribute('type', 'checkbox')
+    const todoText = document.createElement('span')
+
         if (item.text.length > 0) {
-            p.textContent = item.text 
+            todoText.textContent = item.text 
         } else {
-            p.textContent = 'Unnamed todo'
+            todoText.textContent = 'Unnamed todo'
         }
-    return p
+    
+    todoDiv.appendChild(checkbox)
+    todoDiv.appendChild(todoText)
+    todoDiv.appendChild(button)   
+
+    return todoDiv
 }
 
 const renderTodos = function (todos, filters) {

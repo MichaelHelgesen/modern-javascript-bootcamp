@@ -17,6 +17,7 @@ document.querySelector("#search-notes").addEventListener('input', function (e) {
 document.querySelector('#add-notes-form').addEventListener('submit', function (event) {
     event.preventDefault()
     todos.push({
+        id: uuidv4(),
         text: event.target.elements.todoToAdd.value,
         completed: false
     })
