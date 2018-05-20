@@ -37,13 +37,15 @@ const renderTodos = function (todos, filters) {
 
     const searchTextMatch = note.text.toLowerCase().includes(filters.searchText.toLowerCase())
     const hideCompletedMatch = !filters.hideCompleted || !note.completed
-
+        
     return searchTextMatch && hideCompletedMatch
     })
+
 
     const incompleteTodos = filteredTodos.filter(function (todo, index) {
         return !todo.completed
     })
+
 
     document.querySelector('#todos').innerHTML = ''
 
