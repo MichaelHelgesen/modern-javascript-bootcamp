@@ -32,9 +32,19 @@ const generateToDOM = function (item) {
             saveTodo(todos)
             renderTodos(todos, filters)
         })
+    
     const checkbox = document.createElement('input')
-    checkbox.setAttribute('type', 'checkbox')
-    const todoText = document.createElement('span')
+        checkbox.setAttribute('type', 'checkbox')
+        checkbox.checked = item.completed
+        checkbox.addEventListener('change', function () {
+            //item.completed = checkbox.checked
+            toggleTodo(item.id)
+            saveTodo(todos)
+            renderTodos(todos, filters)
+        })
+    
+
+        const todoText = document.createElement('span')
 
         if (item.text.length > 0) {
             todoText.textContent = item.text 
@@ -78,8 +88,18 @@ const deleteTodo = function (id) {
     const noteIndex = todos.findIndex(function (todo) {
         return todo.id === id
     })
-    console.log(noteIndex)
     if (noteIndex > -1) {
         todos.splice(noteIndex, 1)
+    }
+}
+
+// toggleTodo
+const toggleTodo = function (id) {
+    const todo = todos.find(function (todo) {
+        return todo.id === id
+    })
+
+    if (todo !== undefined) {
+        todo.completed = !todo.completed
     }
 }

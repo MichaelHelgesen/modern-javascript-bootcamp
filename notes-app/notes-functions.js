@@ -28,7 +28,9 @@ const removeNote = function (id) {
 // Generate the DOM structure for a note
 const generateNoteDOM = function (note) {
     const noteEl = document.createElement('div')
-    const textElement = document.createElement('span')
+    const textElement = document.createElement('a')
+        textElement.setAttribute('href', '/edit.html')
+
     const button = document.createElement('button')
     
     // SEtup the remove note button
