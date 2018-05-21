@@ -6,14 +6,19 @@ const filters = {
 
 renderNotes(notes, filters)
 
+// Create note
 document.querySelector('#create-note').addEventListener('click', function(e) {
+    const id = uuidv4()
+    
     notes.push({
-        id: uuidv4(),
+        id: id,
         title: '',
         body: ''
     })
     localStorage.setItem('notes', JSON.stringify(notes))
-    renderNotes(notes, filters)
+    location.assign(`/edit.html#${id}`)
+    //location.assign('/edit.html#' + notes[notes.length-1].id)
+
 })
 
 document.querySelector('#search-text').addEventListener('input', function (e) {

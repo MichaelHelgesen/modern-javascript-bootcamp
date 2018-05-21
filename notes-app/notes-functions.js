@@ -29,11 +29,11 @@ const removeNote = function (id) {
 const generateNoteDOM = function (note) {
     const noteEl = document.createElement('div')
     const textElement = document.createElement('a')
-        textElement.setAttribute('href', '/edit.html')
+        textElement.setAttribute('href', `/edit.html#${note.id}`)
 
     const button = document.createElement('button')
     
-    // SEtup the remove note button
+    // Setup the remove note button
     button.textContent = 'x'
     noteEl.appendChild(button)
     button.addEventListener('click', function () {
