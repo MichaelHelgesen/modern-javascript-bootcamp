@@ -24,3 +24,5 @@ document.querySelector('#search-text').addEventListener('input', function (e) {
 document.querySelector('#filter-by').addEventListener('change', function(e) {
     console.log(e.target.value)
 })
+
+console.log(notes)

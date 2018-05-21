@@ -26,7 +26,12 @@ const generateToDOM = function (item) {
 
     const todoDiv = document.createElement('div')
     const button = document.createElement('button')
-    button.textContent = 'x'
+        button.textContent = 'x'
+        button.addEventListener('click', function () {
+            deleteTodo(item.id)
+            saveTodo(todos)
+            renderTodos(todos, filters)
+        })
     const checkbox = document.createElement('input')
     checkbox.setAttribute('type', 'checkbox')
     const todoText = document.createElement('span')
@@ -66,4 +71,15 @@ const renderTodos = function (todos, filters) {
     filteredTodos.forEach(function (item, index) {
         document.querySelector('#todos').appendChild(generateToDOM(item))
     })
+}
+
+// Delete Todo
+const deleteTodo = function (id) {
+    const noteIndex = todos.findIndex(function (todo) {
+        return todo.id === id
+    })
+    console.log(noteIndex)
+    if (noteIndex > -1) {
+        todos.splice(noteIndex, 1)
+    }
 }

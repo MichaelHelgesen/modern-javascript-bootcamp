@@ -26,6 +26,7 @@ document.querySelector('#add-notes-form').addEventListener('submit', function (e
     event.target.elements.todoToAdd.value = ''
 })
 
+// Hide complete todos
 document.querySelector('#hide-completed-todos').addEventListener('change', function (event) {
     filters.hideCompleted = event.target.checked
     renderTodos(todos, filters)
