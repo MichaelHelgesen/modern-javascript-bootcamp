@@ -9,11 +9,13 @@ renderNotes(notes, filters)
 // Create note
 document.querySelector('#create-note').addEventListener('click', function(e) {
     const id = uuidv4()
-    
+    const timestamp = moment().valueOf()
     notes.push({
         id: id,
         title: '',
-        body: ''
+        body: '',
+        createdAt: timestamp,
+        updatedAt: timestamp
     })
     localStorage.setItem('notes', JSON.stringify(notes))
     location.assign(`/edit.html#${id}`)
@@ -37,19 +39,3 @@ window.addEventListener('storage', function (e) {
     }
 })
 
-
-
-const now = new Date()
-
-const timeStamp = now.getTime()
-
-const myDate = new Date(timeStamp)
-
-console.log(myDate.getFullYear())
-
-/* console.log(`Year: ${now.getFullYear()}`)
-console.log(`Month: ${now.getMonth() + 1}`)
-console.log(`Day: ${now.getDate()}`)
-console.log(`Hours: ${now.getHours()}`)
-console.log(`Minutes: ${now.getMinutes()}`)
-console.log(`Seconds: ${now.getSeconds()}`) */
