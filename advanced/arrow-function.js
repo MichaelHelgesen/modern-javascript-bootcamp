@@ -25,3 +25,5 @@ const under30Long = people.filter(function (person) {
     return person.age < 30
 })
 console.log(under30)
+
+const age23 = people.find((person) => person.age === 23)

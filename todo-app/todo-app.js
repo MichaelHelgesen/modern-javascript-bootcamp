@@ -8,13 +8,13 @@ const filters = {
 renderTodos(todos, filters)
 
 // Listen for text change.
-document.querySelector("#search-notes").addEventListener('input', function (e) {
+document.querySelector("#search-notes").addEventListener('input', (e) => {
     filters.searchText = e.target.value
     renderTodos(todos, filters)
 })
 
 // Listen for adding todo
-document.querySelector('#add-notes-form').addEventListener('submit', function (event) {
+document.querySelector('#add-notes-form').addEventListener('submit', (event) => {
     event.preventDefault()
     todos.push({
         id: uuidv4(),
@@ -27,7 +27,7 @@ document.querySelector('#add-notes-form').addEventListener('submit', function (e
 })
 
 // Hide complete todos
-document.querySelector('#hide-completed-todos').addEventListener('change', function (event) {
+document.querySelector('#hide-completed-todos').addEventListener('change', (event) => {
     filters.hideCompleted = event.target.checked
     renderTodos(todos, filters)
 })
