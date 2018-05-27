@@ -1,3 +1,5 @@
+'use strict'
+
 const titleElement = document.querySelector('#note-title')
 const bodyText = document.querySelector('#note-text')
 const removeElement = document.querySelector('#remove-note')

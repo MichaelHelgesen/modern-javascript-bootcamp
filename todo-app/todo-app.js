@@ -1,3 +1,5 @@
+'use strict'
+
 let todos = createTodos()
 
 const filters = {

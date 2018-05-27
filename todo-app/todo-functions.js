@@ -1,3 +1,5 @@
+'use strict'
+
 // Create notes array from localStorage
 const createTodos = () => {
     const todoJSON = localStorage.getItem('todos')
