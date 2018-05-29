@@ -27,3 +27,5 @@ console.log(me.getBio())
 
 const person2 = new Person('Ane', 'Helgesen', 9)
 console.log(person2.getBio())
+
+test
