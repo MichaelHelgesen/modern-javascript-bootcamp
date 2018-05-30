@@ -26,6 +26,11 @@ me.setName('Michael Helgesen')
 console.log(me.getBio())
 
 const person2 = new Person('Ane', 'Helgesen', 9)
+
+ Person.prototype.getBio =  function()  {
+    return 'Testing Testing'
+} 
+
 console.log(person2.getBio())
 
-test
+ 
