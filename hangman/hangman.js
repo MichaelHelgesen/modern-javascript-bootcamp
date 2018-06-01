@@ -1,13 +1,13 @@
-// Create a method for making a guess
-// 1. Should accept a character for guessing
-// 2. Should add unique guesses to list of guesses
-// 3. Should decrement the guesses left if a unique guess isn't a match
-
+// Display the puzzle to the browser instead of the console
+// Display the guesses left to the browser instead of the console
+// Separate the Hangman definition from the rest of the app (use app.js)
 const Hangman = function (word, guesses) {
     this.word = word.toLowerCase().split('')
     this.guesses = guesses
-    this.guessedLetters = []
+    this.guessedLetters = ['k']
+    this.status = 'playing'
 }
+
 
 Hangman.prototype.getPuzzle = function () {
     let puzzle = ''
@@ -35,33 +35,35 @@ Hangman.prototype.getPuzzle = function () {
     return printWord.join('')  */
 }
 
-Hangman.prototype.guess = function () {
-    console.log(arguments)
+  Hangman.prototype.makeGuess = function (guess) {
+    guess = guess.toLowerCase()
+    if (!this.guessedLetters.includes(guess)) {
+        this.guessedLetters.push(guess)
+        if (!this.word.includes(guess) && this.guesses > 0) {
+                this.guesses--
+        }
+    }
+}  
+
+Hangman.prototype.calculateStatus = function () {
+    const word = this.word
+    if (this.guesses < 1) {
+         this.status = 'Failed'
+         this.guesses = 0
+         document.querySelector('#remaining-guesses').textContent =`Game Over`
+    }
+}
+
+/*  Hangman.prototype.guess = function () {
     
     for (i = 0; i < arguments.length; i++) {
-        this.guessedLetters.push(arguments[i])
-
+        if (!this.guessedLetters.includes(arguments[i].toLowerCase())) {
+            this.guessedLetters.push(arguments[i].toLowerCase())
+        }
+        
         if (!this.word.includes(arguments[i])) {
             this.guesses -= 1
         }
     }
     
-    //var args = Array.prototype.slice.call(arguments);
-    //this.guessedLetters.push(args)
-}
-
-const word1 = new Hangman('Cat', 2)
-// Guess c, t, z
-word1.guess('c', 't', 'z')
-console.log(word1.getPuzzle()) // c*t
-// Print remaining guesses
-console.log(`Remaining guesses: ${word1.guesses}`)
-console.log(word1.guessedLetters)
-
-const word2 = new Hangman('New Jersey', 4)
-// Guess w
-word2.guess('w')
-console.log(word2.getPuzzle()) // **w ******
-console.log(`Remaining guesses: ${word2.guesses}`)
-
-
+}   */
