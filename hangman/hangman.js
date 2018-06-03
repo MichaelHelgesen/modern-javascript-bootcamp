@@ -1,12 +1,30 @@
-// Display the puzzle to the browser instead of the console
-// Display the guesses left to the browser instead of the console
-// Separate the Hangman definition from the rest of the app (use app.js)
+// -- Disable new guesses unless "playing"
+// Setup a new method to get back a status message
+
+// Playing -> Guesses left: 3
+// Failed -> Nice try! The word was "cat".
+// Finished -> Great work! You guessed the word.
+
+
 const Hangman = function (word, guesses) {
     this.word = word.toLowerCase().split('')
     this.guesses = guesses
     this.guessedLetters = []
-    this.status = 'playing'
+    this.status = 'Playing'
 }
+
+Hangman.prototype.statusMessage = function () {
+    let messageField = document.querySelector('#remaining-guesses')
+    
+    if (this.status === 'Playing') {
+        messageField.textContent = `Guesses left: ${this.guesses}`
+    } else if (this.status === 'Finished') {
+        messageField.textContent = 'Great work! You guessed the word.'
+    } else {
+        messageField.textContent = ` Nice try! The word was "${this.word.join('')}"`
+    }
+}
+
 
 /* Hangman.prototype.calculateStatus = function () {
     let winning = 0
@@ -30,7 +48,7 @@ const Hangman = function (word, guesses) {
 } */
 
 Hangman.prototype.calculateStatus = function () {
-    const finished = this.word.every((letter) => this.guessedLetters.includes(letter))
+    const finished = this.word.every((letter) => this.guessedLetters.includes(letter) || letter === ' ')
     
     
     
@@ -63,16 +81,23 @@ Hangman.prototype.calculateStatus = function () {
 }
 
 Hangman.prototype.makeGuess = function (guess) {
-    guess = guess.toLowerCase()
+        
+        if (this.status === 'Playing') {
+            
+            guess = guess.toLowerCase()
+        
+            if (!this.guessedLetters.includes(guess)) {
+                this.guessedLetters.push(guess)
+            }
     
-    if (!this.guessedLetters.includes(guess)) {
-        this.guessedLetters.push(guess)
-        if (!this.word.includes(guess) && this.guesses > 0) {
+            if (!this.word.includes(guess) && this.guesses > 0) {
                 this.guesses--
+            }
+           
+            this.calculateStatus()
+            this.statusMessage()
         }
-    }
-    this.calculateStatus()
-}  
+    }  
 
 /*  Hangman.prototype.guess = function () {
     
