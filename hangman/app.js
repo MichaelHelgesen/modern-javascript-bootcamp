@@ -1,19 +1,14 @@
-
-
+const puzzleEl = document.querySelector('#word-to-guess')
+const guessesEl = document.querySelector('#remaining-guesses')
 const word1 = new Hangman('Cat', 3)
 
-
-const toDOM = function () {
-    document.querySelector('#word-to-guess').textContent = word1.getPuzzle()
-    
-   // document.querySelector('#game-over').textContent =`Remaining guesses: ${word1.guesses}`
-}
-
-toDOM()
+puzzleEl.textContent = word1.puzzle
+guessesEl.textContent = word1.statusMsg
 
 window.addEventListener('keypress', function (e) {
     const guess = String.fromCharCode(e.charCode)
     word1.makeGuess(guess)
-    toDOM()
+    puzzleEl.textContent = word1.puzzle
+    guessesEl.textContent = word1.statusMsg
 })
 

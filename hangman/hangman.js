@@ -1,3 +1,7 @@
+// 1 Convert "getStstusMessage" to a a custom getter for "ststusMessage"
+// 2 Convert "getPuzzle" to a custom getter for "puzzle"
+// 3 Change usage in app.js
+
 class Hangman {
     constructor(word, guesses) {
         this.word = word.toLowerCase().split('')
@@ -5,15 +9,14 @@ class Hangman {
         this.guessedLetters = []
         this.status = 'Playing'
     }
-    statusMessage() {
-        let messageField = document.querySelector('#remaining-guesses')
+    get statusMsg() {
     
         if (this.status === 'Playing') {
-            messageField.textContent = `Guesses left: ${this.guesses}`
+            return `Guesses left: ${this.guesses}`
         } else if (this.status === 'Finished') {
-            messageField.textContent = 'Great work! You guessed the word.'
+            return 'Great work! You guessed the word.'
         } else {
-            messageField.textContent = ` Nice try! The word was "${this.word.join('')}"`
+            return ` Nice try! The word was "${this.word.join('')}"`
         }
     }
     calculateStatus() {
@@ -40,12 +43,10 @@ class Hangman {
             }
            
             this.calculateStatus()
-            this.statusMessage()
         }
     }
-    getPuzzle() {
+    get puzzle() {
         let puzzle = ''
-        this.statusMessage()
         this.word.forEach((letter) => {
             if (this.guessedLetters.includes(letter) || letter === ' ') {
                 puzzle += letter
