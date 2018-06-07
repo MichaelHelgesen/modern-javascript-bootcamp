@@ -5,7 +5,7 @@ const word1 = new Hangman('Cat', 3)
 puzzleEl.textContent = word1.puzzle
 guessesEl.textContent = word1.statusMsg
 
-window.addEventListener('keypress', function (e) {
+window.addEventListener('keypress', (e) => {
     const guess = String.fromCharCode(e.charCode)
     word1.makeGuess(guess)
     puzzleEl.textContent = word1.puzzle
@@ -15,13 +15,22 @@ window.addEventListener('keypress', function (e) {
 //MAking a HTTP request
 const request = new XMLHttpRequest()
 
-request.addEventListener('readystatechanged', (e) => {
-    if (e.target.readyState === 4) {
+request.addEventListener('readystatechange', (e) => {
+    if (e.target.readyState === 4 && e.target.status === 200) {
         const data = JSON.parse(e.target.responseText)
         console.log(data)
-    }
+    } else if (e.target.readyState === 4) {
+        console.log('An error')
+    } 
 })
 
-request.open('GET', 'http://puzzle.mead.io/puzzle')
+request.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=3')
 request.send()
 
+
+// MAke a new request for all of the countries
+// Parse the responseText to get back the array of objects
+// Find your country object by it's country code
+// Print the full country name
+
+const countryCode = "NO"
