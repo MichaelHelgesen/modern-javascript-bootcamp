@@ -34,3 +34,17 @@ request.send()
 // Print the full country name
 
 const countryCode = "NO"
+const requestCountries = new XMLHttpRequest()
+
+requestCountries.addEventListener('readystatechange', (e) => {
+    if (e.target.readyState === 4 && e.target.status === 200) {
+        const data = JSON.parse(e.target.responseText)
+        const country = data.find((country) => country.alpha2Code === countryCode)
+        console.log(country.name)
+    } else if (e.target.readyState === 4) {
+        console.log('An error')
+    } 
+})
+
+requestCountries.open('GET', 'https://restcountries.eu/rest/v2/all')
+requestCountries.send()
