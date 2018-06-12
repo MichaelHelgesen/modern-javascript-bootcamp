@@ -12,25 +12,19 @@ window.addEventListener('keypress', (e) => {
     guessesEl.textContent = word1.statusMsg
 })
 
-getPuzzle((error, puzzle) => {
-    if (error) {
-        console.log(`Error: ${error}`)
-    } else {
-        console.log(puzzle)
-    }
+getPuzzle('2').then((puzzle) => {
+    console.log(puzzle)
+}, (err) => {
+    console.log(err)
 })
 
 
 
 
-// Create a new function for getting country details
-// Call it with two arguments: country code, the callback function
-// Make the HTTP request and call the callback with country information
-// Use the callback to print the country name
-getCountry('NO', (error, name) => {
-    if (error) {
-        console.log(`Error: ${error}`)
-    } else {
-        console.log(name)
-    }
+// Convert getCountry to return a new promise
+// Call getCountry and use then to print country name or the error
+getCountry('NO').then((country) => {
+    console.log(country)
+}, (err) => {
+    console.log(err)
 })
