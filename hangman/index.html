@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 
 <html>
-    <head></head>
+    <head>
+        <link href="/styles/styles.css" rel="stylesheet">
+    </head>
     <body>
-        <div id="word-to-guess" style="text-align:center;"></div>
-        <div id="remaining-guesses" style="text-align:center;"></div>
-        <div id="game-over" style="text-align:center;"></div>
-        <button id="reset">Reset</button>
-        <script src="request.js"></script>        
-        <script src="hangman.js"></script>
-        <script src="app.js"></script>
+        <div>
+            <div id="word-to-guess" class="puzzle"></div>
+            <p id="remaining-guesses"></p>
+            <button id="reset" class="button">Reset</button>
+        </div>
+        
+        <script src="/scripts/request.js"></script>        
+        <script src="/scripts/hangman.js"></script>
+        <script src="/scripts/app.js"></script>
     </body>
 </html>
