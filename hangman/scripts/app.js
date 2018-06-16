@@ -11,11 +11,29 @@ window.addEventListener('keypress', (e) => {
 })
 
 const render = () => {
-    puzzleEl.innerHTML = ''
+    
+    const letterSpan = (string) => {
+        const newArray = string.split('')
+        let newString = ''
+        newArray.forEach((element, index) => {
+            newString = newString + '<span>' + element + '</span>'
+        });
+        
+        return newString
+    } 
+
+    puzzleEl.innerHTML = letterSpan(word1.puzzle)
     guessesEl.textContent = word1.statusMsg
+
+    // Instructor code:
+/*     word1.puzzle.split('').forEach((letter) => {
+        const letterEl = document.createElement('span')
+        letterEl.textContent = letter
+    }) */
 
     // For each characther in the string, ass a span into puzzle
     // The spans text should just be the letter itself. 
+    //word1.puzzle
 }
 
 const startGame = async () => {
