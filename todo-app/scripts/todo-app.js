@@ -18,14 +18,18 @@ document.querySelector("#search-notes").addEventListener('input', (e) => {
 // Listen for adding todo
 document.querySelector('#add-notes-form').addEventListener('submit', (event) => {
     event.preventDefault()
-    todos.push({
-        id: uuidv4(),
-        text: event.target.elements.todoToAdd.value,
-        completed: false
-    })
-    saveTodo(todos)
-    renderTodos(todos, filters)
-    event.target.elements.todoToAdd.value = ''
+    const todoEl = event.target.elements.todoToAdd.value.trim()
+    if (todoEl.length > 0) {
+        todos.push({
+            id: uuidv4(),
+            text: todoEl,
+            completed: false
+        })
+        saveTodo(todos)
+        renderTodos(todos, filters)
+        event.target.elements.todoToAdd.value = ''
+    }
+
 })
 
 // Hide complete todos

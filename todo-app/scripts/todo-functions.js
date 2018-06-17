@@ -20,16 +20,35 @@ const saveTodo = (todos) => {
 // Get the DOM elements for list summary
 const generateSummaryDOM = (incompleteTodos) => {
     const header = document.createElement('h3')
-    header.textContent = `You have ${incompleteTodos.length} todos left`
+    header.classList.add('list-title')
+    if (incompleteTodos.length === 1) {
+        header.textContent = `You have ${incompleteTodos.length} todo left`
+    } else {
+        header.textContent = `You have ${incompleteTodos.length} todos left`
+    }
+    
+    
     return header
 }
+
+
+// Add "list-title" class
+// Pluralize (todos) unless you only have one (todo)
 
 // Get the DOM elements for an individual note
 const generateToDOM = (item) => {
 
-    const todoDiv = document.createElement('div')
+    const todoDiv = document.createElement('label')
+    const containerEl = document.createElement('div')
     const button = document.createElement('button')
-        button.textContent = 'x'
+
+        // setup container
+        todoDiv.classList.add('list-item')
+        containerEl.classList.add('list-item__container')
+        todoDiv.appendChild(containerEl)
+
+        button.textContent = 'remove'
+        button.classList.add('button', 'button--text')
         button.addEventListener('click', () => {
             deleteTodo(item.id)
             saveTodo(todos)
@@ -54,9 +73,11 @@ const generateToDOM = (item) => {
             todoText.textContent = 'Unnamed todo'
         }
     
-    todoDiv.appendChild(checkbox)
-    todoDiv.appendChild(todoText)
+    containerEl.appendChild(checkbox)
+    containerEl.appendChild(todoText)
     todoDiv.appendChild(button)   
+
+
 
     return todoDiv
 }
@@ -78,9 +99,18 @@ const renderTodos = (todos, filters) => {
 
     document.querySelector('#todos').appendChild(generateSummaryDOM(incompleteTodos))
     
-    filteredTodos.forEach((item, index) => {
-        document.querySelector('#todos').appendChild(generateToDOM(item))
-    })
+    if (filteredTodos.length > 0) {
+        filteredTodos.forEach((item, index) => {
+            document.querySelector('#todos').appendChild(generateToDOM(item))
+        })
+    } else {
+        const noTodos = document.createElement('p')
+        noTodos.classList.add('empty-message')
+        noTodos.textContent = 'No to-dos to show'
+        document.querySelector("#todos").appendChild(noTodos)
+    }
+
+    
 }
 
 // Delete Todo
@@ -99,3 +129,4 @@ const toggleTodo = (id) => {
         todo.completed = !todo.completed
     }
 }
+

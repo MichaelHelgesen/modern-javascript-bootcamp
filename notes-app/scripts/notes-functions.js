@@ -1,13 +1,5 @@
 'use strict'
 
-let data
-
-const processData = () => {
-    data = '23423432'
-}
-
-processData()
-console.log(data)
 
 // Read existing data from localStorage
 const getSavedNotes = () => {
@@ -40,11 +32,11 @@ const removeNote = (id) => {
 
 // Generate the DOM structure for a note
 const generateNoteDOM = (note) => {
-    const noteEl = document.createElement('div')
-    const textElement = document.createElement('a')
-        textElement.setAttribute('href', `/edit.html#${note.id}`)
+    const noteEl = document.createElement('a')
+    const textElement = document.createElement('p')
+    const statusEl = document.createElement('p')
 
-    const button = document.createElement('button')
+/*    const button = document.createElement('button')
     
     // Setup the remove note button
     button.textContent = 'x'
@@ -53,7 +45,7 @@ const generateNoteDOM = (note) => {
         removeNote(note.id)
         saveNotes(notes)
         renderNotes(notes, filters)
-    })
+    })  */
 
         // Setup the note title text
         if (note.title.length > 0) {
@@ -61,9 +53,21 @@ const generateNoteDOM = (note) => {
         } else {
             textElement.textContent = 'Unnamed note'
         }
-
+    
+    textElement.classList.add('list-item__title')
     noteEl.appendChild(textElement)
     
+    //setup the link
+
+    noteEl.setAttribute('href', `/edit.html#${note.id}`)
+    noteEl.classList.add('list-item')
+
+    // setup the status message
+
+    statusEl.textContent = generateLastEdited(note.updatedAt)
+    statusEl.classList.add('list-item__subtitle')
+    noteEl.appendChild(statusEl)
+
     return noteEl
 }
 
@@ -106,17 +110,27 @@ const sortNotes = (notes, sortBy) => {
 
 // Render application notes
 const renderNotes = (notes, filters) => {
+    const notesEl = document.querySelector('#notes-div')
     notes = sortNotes(notes, filters.sortBy)
     const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()))
 
-    document.querySelector('#notes-div').innerHTML = ''
+    notesEl.innerHTML = ''
 
-    filteredNotes.forEach((note) => {
-        const noteEl = generateNoteDOM(note)
-        document.querySelector('#notes-div').appendChild(noteEl)
-    })
+    if (filteredNotes.length > 0) {
+        filteredNotes.forEach((note) => {
+            const noteEl = generateNoteDOM(note)
+            notesEl.appendChild(noteEl)
+        })
+    } else {
+        const emptyMessage = document.createElement('p')
+        emptyMessage.textContent = 'No notes to show'
+        emptyMessage.classList.add('empty-message')
+        notesEl.appendChild(emptyMessage)
+    }
+
+
 
 }
 
 // Generate last edited message 
-const generateLastEdited = (timestamp) => `Last edited ${moment(note.updatedAt).fromNow()}`
+const generateLastEdited = (timestamp) => `Last edited ${moment(timestamp).fromNow()}`
